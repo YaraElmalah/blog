@@ -16,3 +16,8 @@ https://jsonplaceholder.typicode.com/
 7. Some Reducers sees action, returns the data off the 'payload'
 8. Because we generated some new state object, redux/react-redux cause our app to be rendered
 (We get fetched data into a component by generating a new state in our redux store, then getting that into our component through mapStateToProps)
+
+//Middlewares in Redux
+
+Action Creators => Action => dispatch => Middleware => reducers => state
+=>We can use as many as middlewares as we want.
