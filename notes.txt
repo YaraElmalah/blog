@@ -27,3 +27,16 @@ Action Creators => Action => dispatch => Middleware => reducers => state
 (Relax the rules to action creators)
 
 Rules with react-thunk => - Action creators can return action objects or functions (this is the only rule that changed)
+
+//Rules of Reducers
+
+- The reducers shouldn't return undefined (should return a value) (can return for example)
+- Reducers must look only at the previous state
+NO : 
+-querySelector
+-network connects
+it's work with the data it's already have from the actions
+
+//Mutation in javaScript
+changing any content in js called mutation like arrays and objects
+strings and numbers are inmutable
