@@ -21,3 +21,9 @@ https://jsonplaceholder.typicode.com/
 
 Action Creators => Action => dispatch => Middleware => reducers => state
 =>We can use as many as middlewares as we want.
+
+//Behind the scences of React Thunk 
+
+(Relax the rules to action creators)
+
+Rules with react-thunk => - Action creators can return action objects or functions (this is the only rule that changed)
