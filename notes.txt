@@ -40,3 +40,7 @@ it's work with the data it's already have from the actions
 //Mutation in javaScript
 changing any content in js called mutation like arrays and objects
 strings and numbers are inmutable
+
+Why mutation is bad for redux  ?
+
+Because simply the combineReducers function check for a state array, if we mutate an array it's the same array (arrangement in the memory) but if we create a new array (it alocates in a new arrangement in the memory) this would cause the app not re-render as it detects no change in the state
