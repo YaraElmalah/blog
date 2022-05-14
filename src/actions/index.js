@@ -27,3 +27,14 @@ export const fetchPosts = () => {
     });
   };
 };
+//Each UserHeader attempts to fetch its user.
+export const fetchUser = (id) => {
+    return async (dispatch) => {
+      const response = await jsonPlaceholder.get(`/users/${id}`);
+      dispatch({
+        type: "FETCH_USER",
+        payload: response.data,
+      });
+    };
+}
+ 
