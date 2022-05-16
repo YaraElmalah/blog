@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import jsonPlaceholder from "../apis/jsonPlaceholder";
 
 //this is a bad approach, We should use custom middleware.
@@ -29,12 +30,18 @@ export const fetchPosts = () => {
 };
 //Each UserHeader attempts to fetch its user.
 export const fetchUser = (id) => {
-    return async (dispatch) => {
-      const response = await jsonPlaceholder.get(`/users/${id}`);
+    return (dispatch) => {
+      return _fetchUser(id, dispatch);
+    };
+}
+
+//use lodash here.
+const _fetchUser = _.memoize( async (id, dispatch) => {
+  const response = await jsonPlaceholder.get(`/users/${id}`);
       dispatch({
         type: "FETCH_USER",
         payload: response.data,
       });
-    };
-}
+    });
+
  

@@ -44,3 +44,5 @@ strings and numbers are inmutable
 Why mutation is bad for redux  ?
 
 Because simply the combineReducers function check for a state array, if we mutate an array it's the same array (arrangement in the memory) but if we create a new array (it alocates in a new arrangement in the memory) this would cause the app not re-render as it detects no change in the state
+
+//Lodash library => https://lodash.com/docs/ 
