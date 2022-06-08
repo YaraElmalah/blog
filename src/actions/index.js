@@ -13,6 +13,13 @@ import jsonPlaceholder from "../apis/jsonPlaceholder";
  * if we changed the syntax into Promise, the error would be gone but react-redux works very very fast, and the api request would take time so the respone would be too late to hook with react-redux world.
  *
  */
+
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
+  //Action creator inside action creator.
+  await dispatch(fetchPosts()); //dispatch is sent to reducers which in turn manipulate the state.
+  const userIds =  _.uniq(_.map(getState().posts, 'userId')); //array of posts ids
+  userIds.forEach(id => dispatch(fetchUser(id)));
+}
 export const fetchPosts = () => {
   /*
    * we can pass getState as well to work as we did in the codepen
@@ -20,7 +27,7 @@ export const fetchPosts = () => {
    * so we can manually dispatch an action
    * Check redux-thunk source code https://github.com/reduxjs/redux-thunk/blob/master/src/index.ts
    */
-  return async dispatch =>  {
+  return async dispatch => {
     const response = await jsonPlaceholder.get("/posts");
     dispatch({
       type: "FETCH_POSTS",
@@ -30,18 +37,31 @@ export const fetchPosts = () => {
 };
 //Each UserHeader attempts to fetch its user.
 export const fetchUser = (id) => {
-    return (dispatch) => {
-      return _fetchUser(id, dispatch);
-    };
+  return async (dispatch) => {
+    const response = await jsonPlaceholder.get(`/users/${id}`);
+    dispatch({
+      type: "FETCH_USER",
+      payload: response.data,
+    });
+    // _fetchUser(id, dispatch);
+  };
 }
-
+//memoize solution
 //use lodash here.
-const _fetchUser = _.memoize( async (id, dispatch) => {
+/*const _fetchUser = _.memoize( async (id, dispatch) => {
   const response = await jsonPlaceholder.get(`/users/${id}`);
       dispatch({
         type: "FETCH_USER",
         payload: response.data,
       });
-    });
+    });*/
 
- 
+/*const _fetchUser = _.memoize(async (id, dispatch) => {
+  const response = await jsonPlaceholder.get(`/users/${id}`);
+  dispatch({
+    type: "FETCH_USER",
+    payload: response.data,
+  });
+});*/
+
+
